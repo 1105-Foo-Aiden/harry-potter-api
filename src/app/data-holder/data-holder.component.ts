@@ -2,8 +2,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 
-
-
 @Component({
   selector: 'data',
   standalone: true,
@@ -12,17 +10,28 @@ import { Component, inject } from '@angular/core';
   styleUrl: './data-holder.component.css'
 })
 
-
 export class DataHolderComponent {
 
   public http = inject(HttpClient)
   public data: Array<ICharactors> = [];
   public IsVisible:boolean = false
+  public SelectedCharacter:string = "";
+  public SelectedCharacterHouse:string = "";
+  public SelectedCharacterImage:string = "";
+  
 
-  ModalToggle(){
-    this.IsVisible = !this.IsVisible;
+
+  ModalToggle(characterName: string, image: string, house:string){
+    this.SelectedCharacter = characterName
+    this.SelectedCharacterHouse = house
+    this.SelectedCharacterImage = image
+    this.IsVisible = true;
   }
 
+  TurnModalOff(){
+    this.IsVisible = false
+  }
+  
   ngOnInit(){
     this.http.get('https://potterhead-api.vercel.app/api/characters')
     .subscribe({
@@ -55,6 +64,28 @@ export interface ICharactors {
   alive:            boolean;
   image:            string;
 }
+export interface ISoloChar {
+  id:               string;
+  name:             string;
+  alternate_names:  string[];
+  species:          Species;
+  gender:           Gender;
+  house:            House;
+  dateOfBirth:      null | string;
+  yearOfBirth:      number | null;
+  wizard:           boolean;
+  ancestry:         Ancestry;
+  eyeColour:        EyeColour;
+  hairColour:       HairColour;
+  wand:             Wand;
+  patronus:         Patronus;
+  hogwartsStudent:  boolean;
+  hogwartsStaff:    boolean;
+  actor:            string;
+  alternate_actors: string[];
+  alive:            boolean;
+  image:            string;
+}
 
 export enum Ancestry {
   Empty = "",
@@ -65,6 +96,11 @@ export enum Ancestry {
   PureBlood = "pure-blood",
   QuarterVeela = "quarter-veela",
   Squib = "squib",
+}
+export interface Wand {
+  wood:   string;
+  core:   string;
+  length: number;
 }
 
 export enum EyeColour {
@@ -155,11 +191,6 @@ export enum Species {
   Werewolf = "werewolf",
 }
 
-export interface Wand {
-  wood:   Wood;
-  core:   Core;
-  length: number | null;
-}
 
 export enum Core {
   DragonHeartstring = "dragon heartstring",

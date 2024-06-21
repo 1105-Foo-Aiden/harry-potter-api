@@ -20,8 +20,7 @@ export class DataHolderComponent {
   public IsVisible:boolean = false
 
   ModalToggle(){
-    this.IsVisible = true;
-    console.log("hi");
+    this.IsVisible = !this.IsVisible;
   }
 
   ngOnInit(){

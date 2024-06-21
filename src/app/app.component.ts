@@ -5,7 +5,7 @@ import { DataHolderComponent } from './data-holder/data-holder.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, DataHolderComponent, ],
+  imports: [RouterOutlet, DataHolderComponent,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

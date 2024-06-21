@@ -12,7 +12,6 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        position: relative;
     }
 
     .Name-card{
@@ -28,20 +27,29 @@
     }
 
     .Modal{
-        position: relative;
-        left: .5vh;
-        top: .5vh;
+        position: absolute;
+        left: 50%;
         height: 500px;
-        width: 400px;
+        width: 500px;
         background-color: white;
+        color: #333;
     }
 
+    body{
+        background-color: #333;
+    }
+    
 </style>
 
-    <div class="container" style="padding-top: 50px;">
-        <div *ngFor="let character of data; let i = index" class="Name-card"  style="background-image: '{{character.image}}'; ">
-            <span class="Names">{{ character.name }}</span>
-            <button id="Name-btn" (click)="ModalToggle()">Learn More</button>
+        <div class="container" style="padding-top: 50px;">
+            <div *ngFor="let character of data; let i = index" class="Name-card"  style="background-image: url('{{character.image}}'); ">
+                <span class="Names">{{ character.name }}</span>
+                <button id="Name-btn" (click)="ModalToggle()">Learn More</button>
+                <div class="Modal" *ngIf="IsVisible">
+                    <h1>{{data[i].name}}</h1>
+                    <p>House: {{data[i].house? data[i].house : 'Unknown'}}</p>
+                    <p>Wand wood: {{data[i].wand.wood?data[i].wand.wood:"Unknown"}}</p>
+                </div>
+            </div>
         </div>
-        <div class="Modal" *ngIf="IsVisible">Something</div>
-    </div>
+

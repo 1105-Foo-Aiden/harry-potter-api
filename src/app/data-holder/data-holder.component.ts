@@ -17,21 +17,21 @@ export class DataHolderComponent {
   public IsVisible:boolean = false
   public SelectedCharacter:string = "";
   public SelectedCharacterHouse:string = "";
-  public SelectedCharacterImage:string = "";
+  public SelectedCharacterAltNames:string[] = [];
   
 
 
-  ModalToggle(characterName: string, image: string, house:string){
+  ModalToggle(characterName: string, alt_names:string[], house:string){
     this.SelectedCharacter = characterName
     this.SelectedCharacterHouse = house
-    this.SelectedCharacterImage = image
+    this.SelectedCharacterAltNames = alt_names
     this.IsVisible = true;
   }
 
   TurnModalOff(){
     this.IsVisible = false
   }
-  
+
   ngOnInit(){
     this.http.get('https://potterhead-api.vercel.app/api/characters')
     .subscribe({
@@ -43,28 +43,6 @@ export class DataHolderComponent {
 }
 
 export interface ICharactors {
-  id:               string;
-  name:             string;
-  alternate_names:  string[];
-  species:          Species;
-  gender:           Gender;
-  house:            House;
-  dateOfBirth:      null | string;
-  yearOfBirth:      number | null;
-  wizard:           boolean;
-  ancestry:         Ancestry;
-  eyeColour:        EyeColour;
-  hairColour:       HairColour;
-  wand:             Wand;
-  patronus:         Patronus;
-  hogwartsStudent:  boolean;
-  hogwartsStaff:    boolean;
-  actor:            string;
-  alternate_actors: string[];
-  alive:            boolean;
-  image:            string;
-}
-export interface ISoloChar {
   id:               string;
   name:             string;
   alternate_names:  string[];

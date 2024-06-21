@@ -66,13 +66,13 @@
     <br>
     <div *ngFor="let character of data; let i = index" class="Name-card">
         <span class="Names">{{ character.name }}</span>
-        <button id="Name-btn" (click)="ModalToggle(character.name, character.image, character.house)">Learn More</button>
+        <button id="Name-btn" (click)="ModalToggle(character.name, character.alternate_names, character.house)">Learn More</button>
     </div>
     <div class="Modal" *ngIf="IsVisible">
-        <div (click)="TurnModalOff()">X</div>
         <h1>{{ SelectedCharacter }}</h1>
-        <img class="Modal-Image" src="{{this.SelectedCharacterImage}}" alt="Character Image">
-        <p>House: {{this.SelectedCharacterHouse}}</p>
+        <h2>{{SelectedCharacterAltNames.length > 0 ? SelectedCharacterAltNames : "None"}}</h2>
+        <h3>House: {{this.SelectedCharacterHouse}}</h3>
+        <div (click)="TurnModalOff()">Exit X</div>
     </div>
 </div>
 

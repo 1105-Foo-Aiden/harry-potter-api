@@ -1,4 +1,39 @@
-@for (characters of data; track $index) {
-    <h1>{{ characters.name }}</h1>
-    <p>{{ characters.actor }}</p>
-}
+<style>
+    .Names{
+        font-size: 24px;
+        font-weight: bold;
+        color: #eee;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        padding: 10px;
+    }
+    .container{
+        padding: 30px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .card{
+        border: solid;
+        border-width: 2px;
+        border-color: #eee;
+        border-radius: 10px;
+        margin: 10px;
+        padding: 20px;
+    }
+
+    .card :active{
+        color: #000;
+    }
+</style>
+
+<body>
+    <div class="container">
+        @for (characters of data; track $index) {
+            <div class="card">
+                <span class="Names" id={{$index}}>{{ characters.name }}</span>
+            </div>
+        } 
+    </div>
+</body>

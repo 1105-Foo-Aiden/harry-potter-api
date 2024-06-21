@@ -2,21 +2,23 @@
     .Names{
         font-size: 24px;
         font-weight: bold;
-        color: #eee;
+        color: #333;
         display: flex;
         justify-content: space-between;
         flex-direction: row;
         padding: 10px;
     }
     .container{
-        padding: 30px;
+        padding-top: 50px;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
     }
+
+
     .card{
         border: solid;
-        border-width: 2px;
+        border-width: 3px;
         border-color: #eee;
         border-radius: 10px;
         margin: 10px;
@@ -26,14 +28,31 @@
     .card :active{
         color: #000;
     }
+
 </style>
 
-<body>
     <div class="container">
-        @for (characters of data; track $index) {
-            <div class="card">
-                <span class="Names" id={{$index}}>{{ characters.name }}</span>
+        <div *ngFor="let character of data; let i = index" class="card">
+            <div class="modal-container">
+                <ng-template #content let-modal>
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+                        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <p>{{ character.name }}</p>
+                                <p>{{ character.house }}</p>
+                                <p>{{ character.wand }}</p>
+                                <p>{{ character.actor }}</p>
+                            </div>
+                        </form>
+                    </div>
+                </ng-template>
+                
             </div>
-        } 
+            <span class="Names">{{ character.name }}</span>
+            <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Learn More</button>
+        </div>
     </div>
-</body>

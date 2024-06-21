@@ -1,47 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, inject, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, inject } from '@angular/core';
 
 
 
 @Component({
   selector: 'data',
   standalone: true,
-  imports: [HttpClientModule, CommonModule , NgbDatepickerModule],
+  imports: [HttpClientModule, CommonModule],
   templateUrl: './data-holder.component.html',
   styleUrl: './data-holder.component.css'
 })
 
 
 export class DataHolderComponent {
-  private modalService = inject(NgbModal);
+
   public http = inject(HttpClient)
   public data: Array<ICharactors> = [];
+  public IsVisible:boolean = false
 
-	closeResult = '';
-
-	open(content: TemplateRef<any>) {
-		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true }).result.then(
-			(result) => {
-				this.closeResult = `Closed with: ${result}`;
-			},
-			(reason) => {
-				this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-			},
-		);
-	}
-
-	private getDismissReason(reason: any): string {
-		switch (reason) {
-			case ModalDismissReasons.ESC:
-				return 'by pressing ESC';
-			case ModalDismissReasons.BACKDROP_CLICK:
-				return 'by clicking on a backdrop';
-			default:
-				return `with: ${reason}`;
-		}
-	}
+  ModalToggle(){
+    this.IsVisible = true;
+    console.log("hi");
+  }
 
   ngOnInit(){
     this.http.get('https://potterhead-api.vercel.app/api/characters')

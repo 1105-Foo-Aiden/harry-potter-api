@@ -2,57 +2,46 @@
     .Names{
         font-size: 24px;
         font-weight: bold;
-        color: #333;
+        color: #eee;
         display: flex;
-        justify-content: space-between;
-        flex-direction: row;
         padding: 10px;
+        width: 250px;
     }
+    
     .container{
-        padding-top: 50px;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
+        position: relative;
     }
 
-
-    .card{
+    .Name-card{
         border: solid;
         border-width: 3px;
-        border-color: #eee;
+        color: #eee;
         border-radius: 10px;
         margin: 10px;
         padding: 20px;
+        background-repeat: no-repeat;
+        background-position: auto;
+        background-size: contain;
     }
 
-    .card :active{
-        color: #000;
+    .Modal{
+        position: relative;
+        left: .5vh;
+        top: .5vh;
+        height: 500px;
+        width: 400px;
+        background-color: white;
     }
 
 </style>
 
-    <div class="container">
-        <div *ngFor="let character of data; let i = index" class="card">
-            <div class="modal-container">
-                <ng-template #content let-modal>
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-                        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <p>{{ character.name }}</p>
-                                <p>{{ character.house }}</p>
-                                <p>{{ character.wand }}</p>
-                                <p>{{ character.actor }}</p>
-                            </div>
-                        </form>
-                    </div>
-                </ng-template>
-                
-            </div>
+    <div class="container" style="padding-top: 50px;">
+        <div *ngFor="let character of data; let i = index" class="Name-card"  style="background-image: '{{character.image}}'; ">
             <span class="Names">{{ character.name }}</span>
-            <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Learn More</button>
+            <button id="Name-btn" (click)="ModalToggle()">Learn More</button>
         </div>
+        <div class="Modal" *ngIf="IsVisible">Something</div>
     </div>
